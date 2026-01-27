@@ -194,10 +194,17 @@ def main():
 
     print(f"Converted {len(cosmos_apps)} apps (skipped {skipped} without compose)")
 
-    # Save as plain array (Cosmos marketplace format)
+    # Build final marketplace structure
+    marketplace = {
+        "source": "https://four2theizz0.github.io/cosmos-cloud-casaos-marketplace/servapps.json",
+        "showcase": [],
+        "all": cosmos_apps
+    }
+
+    # Save to file
     output_file = Path("servapps.json")
     with open(output_file, 'w', encoding='utf-8') as f:
-        json.dump(cosmos_apps, f, indent=2, ensure_ascii=False)
+        json.dump(marketplace, f, indent=2, ensure_ascii=False)
 
     print(f"\nGenerated {output_file}")
     print(f"Total apps: {len(cosmos_apps)}")
