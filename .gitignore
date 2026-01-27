@@ -1,0 +1,21 @@
+# Cache directories
+cache/
+compose_cache/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Screenshots (too large for git)
+screenshots/
+
+# Archive
+archive/
