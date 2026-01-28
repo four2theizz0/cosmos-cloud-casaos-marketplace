@@ -123,7 +123,7 @@ def convert_app_to_cosmos(app):
         elif isinstance(screenshot, str):
             screenshots.append(screenshot)
 
-    # Build Cosmos app entry (matches ragdata/cosmos-servapps format)
+    # Build Cosmos app entry (matches lilkidsuave/cosmos-servapps-unofficial format)
     cosmos_app = {
         "name": str(title),
         "longDescription": format_long_description(app),
@@ -193,10 +193,18 @@ def main():
 
     print(f"Converted {len(cosmos_apps)} apps (skipped {skipped} without compose)")
 
-    # Save as plain array (matches ragdata/cosmos-servapps format)
-    output_file = Path("servapps.json")
-    with open(output_file, 'w', encoding='utf-8') as f:
-        json.dump(cosmos_apps, f, indent=2, ensure_ascii=False)
+    # Build final marketplace structure (matches lilkidsuave format)
+    marketplace = {
+        "source": "https://four2theizz0.github.io/cosmos-cloud-casaos-marketplace/index.json",
+        "showcase": cosmos_apps[:10],  # First 10 apps as showcase
+        "all": cosmos_apps
+    }
+
+    # Save to both index.json and servapps.json for compatibility
+    for output_file in ["index.json", "servapps.json"]:
+        with open(Path(output_file), 'w', encoding='utf-8') as f:
+            json.dump(marketplace, f, indent=2, ensure_ascii=False)
+        print(f"Generated {output_file}")
 
     print(f"\nGenerated {output_file}")
     print(f"Total apps: {len(cosmos_apps)}")
