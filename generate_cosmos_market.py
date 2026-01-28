@@ -126,18 +126,17 @@ def convert_app_to_cosmos(app):
     # Build Cosmos app entry
     cosmos_app = {
         "name": str(title),
-        "longDescription": format_long_description(app),
         "description": str(desc)[:200] if desc else "No description available.",
+        "longDescription": format_long_description(app),
         "tags": get_tags_from_category(app.get('category', '')),
         "repository": app_url if app_url else f"https://github.com/{repo}",
         "image": "",  # Docker Hub URL - would need to parse compose to get this
-        "supported_architectures": ["amd64", "arm64"],
-        "id": sanitize_id(title),
-        "screenshots": screenshots,
-        "logo": [],
         "icon": app.get('icon', ''),
-        "artefacts": {},
-        "compose": compose_url
+        "screenshots": screenshots,
+        "compose": compose_url,
+        "supported_architectures": ["amd64", "arm64"],
+        "url": app_url if app_url else f"https://github.com/{repo}",
+        "id": sanitize_id(title)
     }
 
     return cosmos_app
@@ -198,7 +197,7 @@ def main():
     marketplace = {
         "source": "https://four2theizz0.github.io/cosmos-cloud-casaos-marketplace/servapps.json",
         "showcase": [],
-        "all": cosmos_apps
+        "servapps": cosmos_apps
     }
 
     # Save to file
