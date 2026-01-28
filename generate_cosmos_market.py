@@ -123,20 +123,20 @@ def convert_app_to_cosmos(app):
         elif isinstance(screenshot, str):
             screenshots.append(screenshot)
 
-    # Build Cosmos app entry
+    # Build Cosmos app entry (matches ragdata/cosmos-servapps format)
     cosmos_app = {
         "name": str(title),
-        "description": str(desc)[:200] if desc else "No description available.",
         "longDescription": format_long_description(app),
+        "description": str(desc)[:200] if desc else "No description available.",
         "tags": get_tags_from_category(app.get('category', '')),
         "repository": app_url if app_url else f"https://github.com/{repo}",
-        "image": "",  # Docker Hub URL - would need to parse compose to get this
-        "icon": app.get('icon', ''),
-        "screenshots": screenshots,
-        "compose": compose_url,
+        "image": "",
         "supported_architectures": ["amd64", "arm64"],
-        "url": app_url if app_url else f"https://github.com/{repo}",
-        "id": sanitize_id(title)
+        "id": sanitize_id(title),
+        "screenshots": screenshots,
+        "artefacts": {},
+        "icon": app.get('icon', ''),
+        "compose": compose_url
     }
 
     return cosmos_app
@@ -193,17 +193,10 @@ def main():
 
     print(f"Converted {len(cosmos_apps)} apps (skipped {skipped} without compose)")
 
-    # Build final marketplace structure
-    marketplace = {
-        "source": "https://four2theizz0.github.io/cosmos-cloud-casaos-marketplace/servapps.json",
-        "showcase": [],
-        "servapps": cosmos_apps
-    }
-
-    # Save to file
+    # Save as plain array (matches ragdata/cosmos-servapps format)
     output_file = Path("servapps.json")
     with open(output_file, 'w', encoding='utf-8') as f:
-        json.dump(marketplace, f, indent=2, ensure_ascii=False)
+        json.dump(cosmos_apps, f, indent=2, ensure_ascii=False)
 
     print(f"\nGenerated {output_file}")
     print(f"Total apps: {len(cosmos_apps)}")
