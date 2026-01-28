@@ -1,23 +1,31 @@
 {
-  "source": "https://four2theizz0.github.io/cosmos-cloud-casaos-marketplace/test.json",
-  "showcase": [],
+  "source": "https://four2theizz0.github.io/cosmos-cloud-casaos-marketplace/servapps.json",
+  "showcase": [
+    {
+      "name": "GemDigest Bot",
+      "description": "A Telegram bot that summarizes articles from any website into bite-sized nuggets.",
+      "longDescription": "Simplify your reads, amplify your time! GemDigest is a Telegram bot that summarizes articles from any website into bite-sized nuggets, saving you time and energy for what matters most.",
+      "tags": ["telegram", "bot", "self-hosted"],
+      "repository": "https://github.com/bigbeartechworld/big-bear-casaos",
+      "image": "",
+      "supported_architectures": ["amd64", "arm64"],
+      "id": "GemDigestBot",
+      "screenshots": [],
+      "artefacts": {},
+      "icon": "https://cdn.jsdelivr.net/gh/Piero24/GemDigest/.github/images/casOS_logo.png",
+      "compose": "https://raw.githubusercontent.com/bigbeartechworld/big-bear-casaos/master/Apps/gemdigest/docker-compose.yml"
+    }
+  ],
   "all": [
     {
       "name": "GemDigest Bot",
-      "longDescription": "<p>Simplify your reads, amplify your time! GemDigest is a Telegram bot that summarizes articles from any website into bite-sized nuggets, saving you time and energy for what matters most.</p>",
       "description": "A Telegram bot that summarizes articles from any website into bite-sized nuggets.",
-      "tags": [
-        "telegram",
-        "bot",
-        "self-hosted"
-      ],
-      "repository": "https://github.com/bigbeartechworld/big-bear-casaos/tree/master/Apps/gemdigest",
+      "longDescription": "Simplify your reads, amplify your time! GemDigest is a Telegram bot that summarizes articles from any website into bite-sized nuggets, saving you time and energy for what matters most.",
+      "tags": ["telegram", "bot", "self-hosted"],
+      "repository": "https://github.com/bigbeartechworld/big-bear-casaos",
       "image": "",
-      "supported_architectures": [
-        "amd64",
-        "arm64"
-      ],
-      "id": "gemdigest-bot",
+      "supported_architectures": ["amd64", "arm64"],
+      "id": "GemDigestBot",
       "screenshots": [],
       "artefacts": {},
       "icon": "https://cdn.jsdelivr.net/gh/Piero24/GemDigest/.github/images/casOS_logo.png",
