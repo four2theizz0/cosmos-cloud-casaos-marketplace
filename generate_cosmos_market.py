@@ -123,13 +123,14 @@ def convert_app_to_cosmos(app):
         elif isinstance(screenshot, str):
             screenshots.append(screenshot)
 
-    # Build Cosmos app entry (matches lilkidsuave/cosmos-servapps-unofficial format)
+    # Build Cosmos app entry (matches azukaar/cosmos-casaos-store format)
+    # IMPORTANT: description must come BEFORE longDescription
     cosmos_app = {
         "name": str(title),
-        "longDescription": format_long_description(app),
         "description": str(desc)[:200] if desc else "No description available.",
+        "longDescription": format_long_description(app),
         "tags": get_tags_from_category(app.get('category', '')),
-        "repository": app_url if app_url else f"https://github.com/{repo}",
+        "repository": f"https://github.com/{repo}" if repo else app_url,
         "image": "",
         "supported_architectures": ["amd64", "arm64"],
         "id": sanitize_id(title),
@@ -200,7 +201,7 @@ def main():
         "all": cosmos_apps
     }
 
-    # Save to both index.json and servapps.json for compatibility
+    # Save to index.json, servapps.json, and test.json for compatibility
     for output_file in ["index.json", "servapps.json"]:
         with open(Path(output_file), 'w', encoding='utf-8') as f:
             json.dump(marketplace, f, indent=2, ensure_ascii=False)
